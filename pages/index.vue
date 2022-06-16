@@ -135,9 +135,9 @@
       return {
         repositories: [],
         githubAvatar: [],
-        currentStatus: [],
+        currentStatus: [] as string[],
         currentTrackUrl: [],
-        currentTrackArtist: []
+        currentTrackArtist: [] as string[]
       }
     },
     async fetch() {
@@ -175,9 +175,9 @@
       if (currentlyNotPlaying == undefined) {
         this.currentStatus = response.recenttracks.track[0].name;
         this.currentTrackUrl = response.recenttracks.track[0].url;
-        this.currentTrackArtist : [] as string[] = artist;
+        this.currentTrackArtist = artist;
       } else {
-        this.currentStatus : [] as string[] = 'Not listening to anything!';
+        this.currentStatus = 'Not listening to anything!';
       }
     }
 
