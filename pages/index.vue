@@ -169,14 +169,15 @@
       const artistText = parsed[parsed.length - 1];
       const splittedArtistText = artistText.split(/[:]/);
       const onlyArtist = splittedArtistText[splittedArtistText.length - 1];
-      const splittedOnlyArtist:string[] = onlyArtist.split(/["]/);
+      const splittedOnlyArtist = onlyArtist.split(/["]/);
+      const artist:string = splittedOnlyArtist[1];
 
       if (currentlyNotPlaying == undefined) {
         this.currentStatus = response.recenttracks.track[0].name;
         this.currentTrackUrl = response.recenttracks.track[0].url;
-        this.currentTrackArtist = splittedOnlyArtist[1];
+        this.currentTrackArtist : [] as string[] = artist;
       } else {
-        this.currentStatus = 'Not listening to anything!';
+        this.currentStatus : [] as string[] = 'Not listening to anything!';
       }
     }
 
