@@ -1,6 +1,6 @@
 # website
 
-This is my website build with [nuxt.js](https://nuxtjs.org) and [TypeScript](https://www.typescriptlang.org/).
+This is my website build with [Nuxt.js](https://nuxtjs.org) and [TypeScript](https://www.typescriptlang.org/).
 
 ## Build Setup
 
@@ -64,7 +64,7 @@ More information about the usage of this directory in [the documentation](https:
 
 ### License
 
-The project is licensed under the `Apache 2.0 License`.
+The project is licensed under the [`Apache License 2.0`](https://github.com/luisoos/website/blob/main/LICENSE).
 
 ### Contribution
 
