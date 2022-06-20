@@ -24,7 +24,7 @@ body {
 body {
     text-rendering: optimizeLegibility;
 
-    animation: fadeInAnimation ease 0.75s;
+    animation: fadeInAnimation ease 1.5s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
 }
