@@ -179,7 +179,10 @@
       } else {
         this.currentStatus = ['Not listening to anything!'];
       }
-    }
+      
+    },
+    
+    fetchOnServer: false
 
   })
 </script>
