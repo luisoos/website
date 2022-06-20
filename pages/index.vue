@@ -31,7 +31,7 @@
           <a :href="repository.link" target="_blank" rel="noreferrer" class="flex flex-row">
             <div class="repo-inner w-full flex flex-col h-40 md:h-40 sm:h-36 p-4 bg-white/10 rounded-md cursor-pointer">
               <h5 class="repo-name font-semibold mb-1"> {{ repository.repo }} </h5>
-              <p class="text-sm text-gray-800/70 font-medium opacity-80"> {{ repository.description }} </p>
+              <p class="text-sm font-medium opacity-80"> {{ repository.description }} </p>
               <div class="repo-details flex flex-row gap-4 text-gray-300 text-sm mt-auto">
                 <div class="flex flex-row items-center justify-center">
                   <div class="w-3 h-3 rounded-full mr-1 language" :style="'--background-color: ' + repository.languageColor" style="background-color: var(--background-color);"></div>
