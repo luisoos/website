@@ -149,9 +149,9 @@
         loadingCurrentSong: false,
         repositories: [],
         githubAvatar: [],
-        currentStatus: [] as string[],
+        currentStatus: "Song",
         currentTrackUrl: [],
-        currentTrackArtist: [] as string[]
+        currentTrackArtist: "Artist"
       }
     },
     async fetch() {
