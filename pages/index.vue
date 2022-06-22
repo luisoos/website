@@ -3,8 +3,13 @@
     <Navbar/>
     <div class="introduction mt-40">
       <div class="profile">
-        <img :src="githubAvatar" alt="GitHub Avatar">
-        <div class="music-status mb-2 py-2">
+        <div v-if="!(loadingProfilePicture)">
+          <img :src="githubAvatar" alt="GitHub Avatar">
+        </div>
+        <div v-else>
+          <p class="text-left opacity-80">Loading content...</p>
+        </div>
+        <div v-if="!(loadingCurrentSong)" class="music-status mb-2 py-2">
           <a :href="currentTrackUrl" target="_blank" rel="noreferrer">
             <div class="flex flex-row items-center">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffffff" class="bi bi-spotify mr-2" viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.669 11.538a.498.498 0 0 1-.686.165c-1.879-1.147-4.243-1.407-7.028-.77a.499.499 0 0 1-.222-.973c3.048-.696 5.662-.397 7.77.892a.5.5 0 0 1 .166.686zm.979-2.178a.624.624 0 0 1-.858.205c-2.15-1.321-5.428-1.704-7.972-.932a.625.625 0 0 1-.362-1.194c2.905-.881 6.517-.454 8.986 1.063a.624.624 0 0 1 .206.858zm.084-2.268C10.154 5.56 5.9 5.419 3.438 6.166a.748.748 0 1 1-.434-1.432c2.825-.857 7.523-.692 10.492 1.07a.747.747 0 1 1-.764 1.288z"/></svg>
@@ -12,6 +17,9 @@
               <p v-else class="music text-left font-semibold"> Currently not listening to anything! </p>
             </div>
           </a>
+        </div>
+        <div v-else>
+          <p class="text-left opacity-80 mb-2 py-2">Loading content...</p>
         </div>
       </div>
       <h1 class="text-3xl font-bold sm:text-4xl md:text-6xl text-left font-black mt-4 pb-4"> Hi, I'm Luis! </h1>
@@ -26,7 +34,7 @@
         <a href="https://github.com/luisoos" target="_blank" rel="noreferrer">GitHub</a><span class="opacity-80">.</span>
       </p>
       <br>
-      <div class="repositories w-full grid grid-cols-1 sm:grid-cols-2 grid-rows-2 md:grid-rows-1 mb-12 gap-4">
+      <div v-if="!(loading)" class="repositories w-full grid grid-cols-1 sm:grid-cols-2 grid-rows-2 md:grid-rows-1 mb-12 gap-4">
         <div class="repo w-full" v-for="repository of repositories">
           <a :href="repository.link" target="_blank" rel="noreferrer" class="flex flex-row">
             <div class="repo-inner w-full flex flex-col h-40 md:h-40 sm:h-36 p-4 bg-white/10 rounded-md cursor-pointer">
@@ -47,6 +55,9 @@
             </div>
           </a>
         </div>
+      </div>
+      <div v-else="!(loadingRepos)">
+        <p class="text-left opacity-80">Loading content...</p>
       </div>
       <div class="technologies section-below">
         <h2 class="text-xl font-bold sm:text-lg md:text-2xl text-left font-font-extrabold">Technologies</h2>
@@ -126,13 +137,16 @@
 </style>
 
 <script lang="ts">
-  import Vue from 'vue'
+  import Vue from 'vue';
 
   export default Vue.extend({
     name: 'IndexPage',
     
     data() {
       return {
+        loadingProfilePicture: false,
+        loadingRepos: false,
+        loadingCurrentSong: false,
         repositories: [],
         githubAvatar: [],
         currentStatus: [] as string[],
@@ -141,6 +155,12 @@
       }
     },
     async fetch() {
+      /* Defining variables in order to display "loading" status */
+      this.loadingProfilePicture = true;
+      this.loadingRepos = true;
+      this.loadingCurrentSong = true;
+
+
       /* Defining usernames & API keys */
       const githubUserName:string = 'luisoos';
 
@@ -148,14 +168,15 @@
       const lastFmApiKey:string = 'a53048daf41428bd0b06800d1fbdb754';
 
 
-      /* Fetching pinned repositories */
-      this.repositories = await fetch(`https://gh-pinned-repos.egoist.sh/?username=${githubUserName}`).then(res => res.json())
-
-      
       /* Fetching GitHub Avatar */
       const githubUser = await fetch(`https://api.github.com/users/${githubUserName}`).then(res => res.json())
       this.githubAvatar = githubUser.avatar_url
+      this.loadingProfilePicture = false;
+      
 
+      /* Fetching pinned repositories */
+      this.repositories = await fetch(`https://gh-pinned-repos.egoist.sh/?username=${githubUserName}`).then(res => res.json())
+      this.loadingRepos = false;
 
       /* Fetching currently playing track */
       const fetchUrl:string = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${lastFmUserName}&api_key=${lastFmApiKey}&format=json`;
@@ -179,7 +200,8 @@
       } else {
         this.currentStatus = ['Not listening to anything!'];
       }
-      
+
+      this.loadingCurrentSong = false;
     },
     
     fetchOnServer: false
