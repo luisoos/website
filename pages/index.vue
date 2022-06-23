@@ -150,11 +150,6 @@
         currentTrackArtist: [] as string[]
       }
     },
-    mounted() {
-      window.addEventListener('resize', () => {
-        this.windowWidth = window.windowWidth
-      })
-    },
     async fetch() {
       /* Defining variables in order to display "loading" status */
       this.loadingProfilePicture = true;
