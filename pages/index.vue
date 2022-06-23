@@ -140,9 +140,9 @@
     data() {
       return {
         windowWidth: 0,
-        loadingProfilePicture: false,
-        loadingRepos: false,
-        loadingCurrentSong: false,
+        loadingProfilePicture: true,
+        loadingRepos: true,
+        loadingCurrentSong: true,
         repositories: [],
         githubAvatar: [],
         currentStatus: [] as string[],
