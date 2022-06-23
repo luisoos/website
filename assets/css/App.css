@@ -1,7 +1,3 @@
-/* Importing fonts */
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap');
-
 /* Boilerplate and standardizing */
 
 * {
@@ -24,7 +20,7 @@ body {
 body {
     text-rendering: optimizeLegibility;
 
-    animation: fadeInAnimation ease 1.5s;
+    animation: fadeInAnimation ease 0.75s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
 }
@@ -93,9 +89,9 @@ body {
 }
 
 h1 {
-    
     font-weight: 900;
-    letter-spacing: -2px;
+
+    letter-spacing: -2.5px;
 }
 
 h2 {
@@ -140,22 +136,22 @@ h2 {
 }
 
 
+.repo-inner * {
+    text-align: left;
+}
+
 .repo-inner {
     border: 1px solid rgba(255, 255, 255, 0.2);
 
     transition: all 0.25s ease-in-out 0.1s;
 }
 
-.repo-inner * {
-    text-align: left;
-}
-
 .repo-inner:hover {
-    border: 1px solid #131516;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 
     opacity: 0.95;
     
-    transform: scale(0.995);
+    transform: scale(0.99);
 }
 
 .language {
