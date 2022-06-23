@@ -34,7 +34,7 @@
         <a href="https://github.com/luisoos" target="_blank" rel="noreferrer">GitHub</a><span class="opacity-80">.</span>
       </p>
       <br>
-      <div v-if"loadingRepos">
+      <div v-if="loadingRepos">
         <p class="text-left opacity-80">Loading content...</p>
       </div>
       <div v-else class="repositories w-full grid grid-cols-1 sm:grid-cols-2 grid-rows-2 md:grid-rows-1 mb-12 gap-4">
