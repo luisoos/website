@@ -1,6 +1,6 @@
 # website
 
-This is my website build with [Nuxt.js](https://nuxtjs.org) and [TypeScript](https://www.typescriptlang.org/).
+This is my website build with [Nuxt.js](https://nuxtjs.org), [TypeScript](https://www.typescriptlang.org/) and [Tailwind CSS](https://tailwindcss.com/).
 
 ## Build Setup
 
