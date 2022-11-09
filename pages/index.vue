@@ -27,8 +27,8 @@
     </div>
     <div class="projects section-below">
       <h2 class="text-xl font-bold sm:text-lg md:text-2xl text-left font-font-extrabold"> What do I do? </h2>
-      <p class="text-left"> <span class="opacity-80"> I am working on multiple things. Currently I am working on </span>
-        <a href="https://github.com/KonVision" target="_blank" rel="noreferrer">KonVision</a><span class="opacity-80">, an open-source image host, but also 
+      <p class="text-left"> <span class="opacity-80"> I am working on multiple things. Currently, I am working on </span>
+        <a href="https://github.com/Floppahost" target="_blank" rel="noreferrer">Floppa.host</a><span class="opacity-80">, an image host, but I am also 
         building some things that got me interested. Open-source projects can be found on my </span>
         <a href="https://github.com/luisoos" target="_blank" rel="noreferrer">GitHub</a><span class="opacity-80">.</span>
       </p>
@@ -172,7 +172,7 @@
       
 
       /* Fetching pinned repositories */
-      this.repositories = await fetch(`https://gh-pinned-repos.egoist.sh/?username=${githubUserName}`).then(res => res.json())
+      this.repositories = await fetch(`https://gh-pinned-repos.egoist.dev/?username=${githubUserName}`).then(res => res.json())
       this.loadingRepos = false;
 
       /* Fetching currently playing track */
