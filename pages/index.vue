@@ -21,7 +21,7 @@
           </a>
         </div>
       </div>
-      <h1 class="text-3xl font-bold sm:text-4xl md:text-6xl text-left font-black mt-4 pb-4"> Hi, I'm Luis! </h1>
+      <h1 class="text-3xl font-bold sm:text-4xl md:text-6xl text-left font-black mt-4 pb-4 overflow-hidden"> Hi, I'm Luis! </h1>
       <p class="opacity-80 text-left"> I'm a software engineer from Germany. I'm a full stack developer focusing 
         on building secure applications. </p>
     </div>
