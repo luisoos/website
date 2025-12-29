@@ -1,13 +1,89 @@
 ---
-title: 'Why I am open-sourcing my SaaS'
+title: 'Why I am open-sourcing my SaaS startup idea'
 description: 'The software world is overflood with AI.'
 pubDate: 2025-12-29
 ---
 
-## What is this blog for?
+## I made the source public.
 
-I always like to look back at the thoughts I had a few days, a couple of months or years ago. And why not make them accessible to everyone?
+A few months ago I started working on a new startup idea: you chat with an AI in a voice-to-voice interaction and try to sell a product to an AI character. 
+I had fun building this SaaS but because of not having enough time I abandoned it with some to-dos left open. 
+The project was running in production but some nice-to-have features for the market as well as a payment system were not integrated yet.
 
-Moreover, I think it is a great project I can always “work” on. If some people on the internet find my content helpful or interesting, that's even better.
+After leaving the project on pause, wanting to continue and publish it to the market in the future, I decided to make the project open-source.
 
-Also, I think I need to practice writing. Learning Latin in school destroyed my ability to build good sentences. Even though I already read more, I think maintaining this blog could have a good side effect.
+I am proud of the work I've done &ndash; UX wise it's one of my best projects yet. But the project didn't feel purposeful to me.
+
+### AI in software is a nightmare ...
+
+> Almost any new software startup today is an AI wrapper. 
+
+**This has been true for the last 3 years.**
+This SaaS space has lost its focus on usability. The **added value is low**. 
+This may merely be because the amount of software on the market has become so high.
+But the transformation of AI being pushed into any software is nothing great. 
+
+Think of the intrusive Microsoft Copilot. It's everywhere. You can't escape if you have Windows 11.
+
+And the integration of AI assistants has no character. It is all the same.
+
+A lot of people are referencing 📎 Clippy with this argument. I am not here to talk about wether Clippy was a good or bad idea or made good or bad quality-wise. 
+But Clippy was fun. It was a personification; a character.
+
+I feel like we will never see something like Clippy again in big or successful software. The latter has **become mundane; everything now feels overly professional and too tidy**.
+
+AI is supposed to personalise, maybe even take a step backwards with regard to formalism/tidiness.
+
+My project also became like this. This is why I abandoned it. By sharing it with the open-source community I allow other people that might have a usecase for my software to adapt it to their needs. Without selling them something with no soul.
+
+### The imposter syndrome
+
+It feels like all software projects are just symbols. They don't mean anything. Code has no value for me anymore. 
+
+Especially since AI IDEs have started to exist (and actually became good for basic things) development is not meaningful. Anyone can develop anything in as little time as never before. 
+
+Especially full-stack development is affected by this. Nothing couldn't be coded by AI. You just need the correct natural language. It somehow feels like it isn't a skill anymore.
+
+I learned coding way before AI took over and especially before it became as good as it is now (2022/2023 GPT couldn't solve any of my tasks back then). 
+
+##### Now, everything I've learned about development and programming languages feels like just words on my resume with little meaning.
+
+Anyone can be good at Python or TypeScript today. What's more important than ever is to demonstrate your ability to develop rather than just to program.
+
+#### Development =/ Programming
+
+This is why I made my startup open-source. Anyone can now review the development process and how I work. 
+One can vibe-code and ship a startup idea very fast now. Make some money off something that adds minimal value.
+No matter how, **you gain no credibility with it**. This is the point: **the product could be built by anyone.
+The engineering behind it is unique**, since AI wasn't the author.
+
+##### "Ship fast"
+
+Shipping fast is a trend in modern fullstack development where vibe-coders think of a SaaS idea and then try to build a MVP as fast as possible.
+
+*They sell this MVP.*
+
+Results are sales to customers (mostly B2C SaaS) of some AI-slop software, adding little value. Software that has a few features and no character.
+Boring software. Bad software. Software that leads to data-breaches as often shared about fast-shipped softare on X (Twitter).
+
+But they make money with it &ndash; there's no question. 
+
+What about credibility gained from this SaaS? In my opinion: zero.
+
+##### I want more transparency again. 
+
+I want more transparency of software. In regard to the backends of software we use, how the data that is being collected is used and stored and in regard to privacy-first design.
+
+Modern software doesn't earn anyone credibility anymore.
+
+This is why I am open-sourcing my startup idea.
+
+Anyone can now review my code, maybe even learn from it. See that the development process is real and thought of. Engineering instead of "Fast shipping".
+
+## Summary
+- Software is often low in value today.
+- AI integration can lead to poor development quality.
+- I am open-sourcing my project:
+    - To rebuild trust and credibility, allowing others to see my genuine development process.
+    - Because the project was abandoned, I can share my work without introducing another AI-dependent solution to the market.
+    - To promote ethical practices and transparency in software development.

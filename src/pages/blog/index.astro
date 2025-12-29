@@ -64,16 +64,15 @@ const bloggingDays = days.length;
 
 			<p class="opacity-80 pb-4 leading-relaxed">
 				Welcome to my blog! <br />
-				In total, there
+				In total, I have written
 				{postsWithMetadata.length !== 1
-					? `are ${postsWithMetadata.length} articles.`
-					: `is ${postsWithMetadata.length} article.`}
+					? `${postsWithMetadata.length} articles.`
+					: `${postsWithMetadata.length} article`}
+				over the course of 
 				{bloggingDays > 0 && (
 					<>
-						<br />
-						I've blogged for a total of <strong>{bloggingDays} {bloggingDays !== 1 ? 'days' : 'day'}</strong>
-						{bloggingMonths > 1 && (<strong> in {bloggingMonths} separate months</strong>)}
-						{bloggingYears > 1 && (<strong> in {bloggingYears} separate years</strong>)}.
+						<strong>{bloggingDays} {bloggingDays !== 1 ? 'days' : 'day'}</strong>
+						{bloggingYears > 1 ? (<strong> across {bloggingYears} different years</strong>) : (bloggingMonths > 1 && (<strong> across {bloggingMonths} different months</strong>))}.
 					</>
 				)}
 				I hope you find some articles interesting. :)
