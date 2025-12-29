@@ -1,0 +1,13 @@
+---
+title: 'Why I am open-sourcing my SaaS'
+description: 'The software world is overflood with AI.'
+pubDate: 2025-12-29
+---
+
+## What is this blog for?
+
+I always like to look back at the thoughts I had a few days, a couple of months or years ago. And why not make them accessible to everyone?
+
+Moreover, I think it is a great project I can always “work” on. If some people on the internet find my content helpful or interesting, that's even better.
+
+Also, I think I need to practice writing. Learning Latin in school destroyed my ability to build good sentences. Even though I already read more, I think maintaining this blog could have a good side effect.

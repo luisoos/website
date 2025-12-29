@@ -1,0 +1,111 @@
+---
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+import ThemeToggle from '../../components/ThemeToggle.astro';
+import BlogPost from '../../layouts/BlogPost.astro';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+	return posts.map((post) => ({
+		params: { slug: post.id },
+		props: post,
+	}));
+}
+
+type Props = CollectionEntry<'blog'>;
+
+const post = Astro.props;
+const { Content } = await render(post);
+
+// Get all posts to find previous/next
+const allPosts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const currentIndex = allPosts.findIndex((p) => p.id === post.id);
+const previousPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
+const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
+
+function toMonthName(monthNumber: number): string {
+	const date = new Date();
+	date.setMonth(monthNumber - 1);
+	return date.toLocaleString('en-US', { month: 'long' });
+}
+
+function formatDate(dateObj: Date): string {
+	const dateStr = dateObj.toISOString().split('T')[0];
+	const [year, monthNum, day] = dateStr.split('-');
+	const month = toMonthName(parseInt(monthNum));
+	return `${month} ${parseInt(day)}, ${year}`;
+}
+---
+
+<BlogPost {...post.data}>
+	<div class="w-full mb-4 flex items-start justify-between">
+		<a href="/blog/" class="flex items-center opacity-40 hover:opacity-100 transition-opacity">
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="20"
+				height="20"
+				fill="currentColor"
+				class="bi bi-arrow-left-short my-auto mr-1"
+				viewBox="0 0 16 16"
+			>
+				<path
+					fill-rule="evenodd"
+					d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"
+				/>
+			</svg>
+			<span class="my-auto">Back Home</span>
+		</a>
+		<div class="my-auto ml-auto">
+			<ThemeToggle />
+		</div>
+	</div>
+
+	<Content />
+
+	<div class="w-full mb-1 mt-12 sm:flex justify-between gap-4 pt-8 border-t border-neutral-200 dark:border-neutral-700">
+		{previousPost && (
+			<a
+				href={`/blog/${previousPost.id}/`}
+				class="flex items-center opacity-40 hover:opacity-100 transition-opacity"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="20"
+					height="20"
+					fill="currentColor"
+					class="bi bi-arrow-left-short my-auto mr-1 flex-shrink-0"
+					viewBox="0 0 16 16"
+				>
+					<path
+						fill-rule="evenodd"
+						d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"
+					/>
+				</svg>
+				<span class="line-clamp-1">{previousPost.data.title}</span>
+			</a>
+		)}
+		{nextPost && (
+			<a
+				href={`/blog/${nextPost.id}/`}
+				class="flex items-center opacity-40 hover:opacity-100 transition-opacity sm:ml-auto"
+			>
+				<span class="line-clamp-1">{nextPost.data.title}</span>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="20"
+					height="20"
+					fill="currentColor"
+					class="bi bi-arrow-right-short my-auto ml-1 flex-shrink-0"
+					viewBox="0 0 16 16"
+				>
+					<path
+						fill-rule="evenodd"
+						d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+					/>
+				</svg>
+			</a>
+		)}
+	</div>
+</BlogPost>

@@ -1,0 +1,110 @@
+---
+import { getCollection } from 'astro:content';
+import FormattedDate from '../../components/FormattedDate.astro';
+import ThemeToggle from '../../components/ThemeToggle.astro';
+import Layout from '../../layouts/Layout.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+
+interface PostWithMetadata {
+	id: string;
+	data: any;
+	year: string;
+	month: string;
+	day: string;
+	monthYear: string;
+}
+
+function toMonthName(monthNumber: number): string {
+	const date = new Date();
+	date.setMonth(monthNumber - 1);
+	return date.toLocaleString('en-US', { month: 'long' });
+}
+
+let posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+// Add year, month, day metadata to each post
+const postsWithMetadata: PostWithMetadata[] = posts.map((post) => {
+	const dateStr = post.data.pubDate.toISOString().split('T')[0];
+	const [year, monthNum, day] = dateStr.split('-');
+	const month = toMonthName(parseInt(monthNum));
+
+	return {
+		...post,
+		year,
+		month,
+		day,
+		monthYear: `${month} ${year}`,
+	};
+});
+
+// Get unique dates for grouping
+const uniqueDates = [...new Set(postsWithMetadata.map((p) => p.monthYear))];
+
+// Calculate blog statistics
+const years = [...new Set(postsWithMetadata.map((p) => p.year))];
+const months = [...new Set(postsWithMetadata.map((p) => p.month))];
+const days = [...new Set(postsWithMetadata.map((p) => p.day))];
+
+const bloggingYears = years.length;
+const bloggingMonths = months.length;
+const bloggingDays = days.length;
+---
+
+<Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+	<div class="min-h-screen">
+		<div class="mt-16 mx-auto max-w-3xl px-5">
+			<div class="w-full mb-4 flex items-start justify-between">
+				<h1 class="text-3xl md:text-4xl pt-2 pb-1 font-bold">Blog</h1>
+				<div class="my-auto ml-auto">
+					<ThemeToggle />
+				</div>
+			</div>
+
+			<p class="opacity-80 pb-4 leading-relaxed">
+				Welcome to my blog! <br />
+				In total, there
+				{postsWithMetadata.length !== 1
+					? `are ${postsWithMetadata.length} articles.`
+					: `is ${postsWithMetadata.length} article.`}
+				{bloggingDays > 0 && (
+					<>
+						<br />
+						I've blogged for a total of <strong>{bloggingDays} {bloggingDays !== 1 ? 'days' : 'day'}</strong>
+						{bloggingMonths > 1 && (<strong> in {bloggingMonths} separate months</strong>)}
+						{bloggingYears > 1 && (<strong> in {bloggingYears} separate years</strong>)}.
+					</>
+				)}
+				I hope you find some articles interesting. :)
+			</p>
+
+			<section class="mt-8">
+				{uniqueDates.map((monthYear) => (
+					<div class="mt-2">
+						<p class="text-lg font-semibold opacity-80 pt-2 pb-1">{monthYear}</p>
+						<ul class="space-y-2 ml-4">
+							{postsWithMetadata
+								.filter((post) => post.monthYear === monthYear)
+								.map((post) => (
+									<li class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
+										<a
+											href={`/blog/${post.id}/`}
+											class="block opacity-70 hover:opacity-100 underline decoration-neutral-300 dark:decoration-neutral-800 transition-opacity"
+										>
+											{post.data.title}
+										</a>
+										<div class="sm:ml-2 sm:w-[125px] sm:text-right mb-2 sm:mb-0 opacity-60">
+											<p class="text-zinc-400 text-sm sm:text-base whitespace-nowrap">
+												{post.month} {post.day}
+											</p>
+										</div>
+									</li>
+								))}
+						</ul>
+					</div>
+				))}
+			</section>
+		</div>
+	</div>
+</Layout>

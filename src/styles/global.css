@@ -1,0 +1,426 @@
+/* Tailwind CSS Functions */
+@import "tailwindcss";
+@plugin '@tailwindcss/typography';
+
+/* Dark mode overrides */
+html.dark {
+    background-color: #0a0a0a;
+    color: #fafafa;
+}
+
+html.dark body,
+html.dark body * {
+    color: #fafafa;
+}
+
+html.light {
+    background-color: #ffffff;
+    color: #0f0f0f;
+}
+
+html.light body,
+html.light body * {
+    color: #0f0f0f;
+}
+
+@layer base {
+    html {
+        -webkit-tap-highlight-color: transparent;
+    }
+}
+
+@layer utilities {
+    .pb-safe {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+}
+
+/* Fonts */
+
+@font-face {
+    font-family: 'Public Sans';
+    src: url('/fonts/public-sans/PublicSans-Regular.otf');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Public Sans Medium';
+    src: url('/fonts/public-sans/PublicSans-Medium.otf');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Public Sans Semibold';
+    src: url('/fonts/public-sans/PublicSans-Semibold.otf');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Public Sans Bold';
+    src: url('/fonts/public-sans/PublicSans-Bold.otf');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Public Sans Black';
+    src: url('/fonts/public-sans/PublicSans-Bold.otf');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Public Sans Semibold Italic';
+    src: url('/fonts/public-sans/PublicSans-SemiBoldItalic.otf');
+    font-weight: 700;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Libre Baskerville';
+    src: url('/fonts/libre-baskerville/LibreBaskerville-Regular.ttf');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Libre Baskerville';
+    src: url('/fonts/libre-baskerville/LibreBaskerville-Medium.ttf');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Libre Baskerville';
+    src: url('/fonts/libre-baskerville/LibreBaskerville-SemiBold.ttf');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Libre Baskerville';
+    src: url('/fonts/libre-baskerville/LibreBaskerville-Bold.ttf');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Libre Baskerville';
+    src: url('/fonts/libre-baskerville/LibreBaskerville-Italic.ttf');
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Libre Baskerville';
+    src: url('/fonts/libre-baskerville/LibreBaskerville-BoldItalic.ttf');
+    font-weight: 700;
+    font-style: italic;
+}
+
+.fraunces {
+    font-family:
+        'Libre Baskerville',
+        ui-serif,
+        Georgia,
+        Cambria,
+        Times New Roman,
+        Times,
+        serif;
+}
+
+/* Theme settings */
+
+.theme-light {
+    --background: #ffffff;
+    --text: #000000;
+    --accent: rgba(0, 0, 0, 0.6);
+}
+
+.theme-dark {
+    --background: #0e0e0e;
+    --text: #f8f8f8;
+    --accent: rgba(255, 255, 255, 0.6);
+}
+
+.prose :where(a):not(:where([class~='not-prose'] *)),
+.prose :where(strong):not(:where([class~='not-prose'] *)) {
+    color: var(--text);
+    opacity: 90%;
+}
+
+.prose h1 a {
+    color: var(--text);
+    opacity: 100%;
+    word-spacing: 2px;
+}
+
+.prose h2 a {
+    color: var(--text);
+    opacity: 100%;
+    word-spacing: 1.5px;
+}
+
+.prose h3 a {
+    color: var(--text);
+    opacity: 100%;
+    word-spacing: 1.5px;
+}
+
+.prose h4 a {
+    color: var(--text);
+    opacity: 100%;
+    word-spacing: 1.5px;
+}
+
+.prose h5 a {
+    color: var(--text);
+    opacity: 100%;
+    word-spacing: 1px;
+}
+
+.prose h6 a {
+    color: var(--text);
+    opacity: 100%;
+    word-spacing: 1px;
+}
+
+/* Main styling */
+
+body * {
+    color: var(--text);
+    font-family:
+        Public Sans Medium,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        Segoe UI,
+        Roboto,
+        Helvetica Neue,
+        Arial,
+        Noto Sans,
+        sans-serif,
+        'Apple Color Emoji',
+        'Segoe UI Emoji',
+        Segoe UI Symbol,
+        'Noto Color Emoji';
+}
+
+.main-div {
+    width: 640px;
+}
+
+@media screen and (max-width: 701px) {
+    .main-div {
+        width: 90%;
+    }
+}
+
+h1,
+h1 a {
+    font-family:
+        'Libre Baskerville',
+        ui-serif,
+        Georgia,
+        Cambria,
+        Times New Roman,
+        Times,
+        serif;
+    font-weight: 700;
+}
+
+h2,
+h2 a {
+    font-family:
+        'Libre Baskerville',
+        ui-serif,
+        Georgia,
+        Cambria,
+        Times New Roman,
+        Times,
+        serif;
+    font-weight: 700;
+}
+
+h3,
+h3 a {
+    font-family:
+        'Libre Baskerville',
+        ui-serif,
+        Georgia,
+        Cambria,
+        Times New Roman,
+        Times,
+        serif;
+    font-weight: 600;
+}
+
+h4,
+h4 a {
+    font-family:
+        'Libre Baskerville',
+        ui-serif,
+        Georgia,
+        Cambria,
+        Times New Roman,
+        Times,
+        serif;
+    font-weight: 600;
+}
+
+h5,
+h5 a {
+    font-family:
+        Fraunces Semibold,
+        ui-serif,
+        Georgia,
+        Cambria,
+        Times New Roman,
+        Times,
+        serif;
+    font-weight: 600;
+}
+
+h6,
+h6 a {
+    font-family:
+        Fraunces Semibold,
+        ui-serif,
+        Georgia,
+        Cambria,
+        Times New Roman,
+        Times,
+        serif;
+    font-weight: 600;
+}
+
+.surrounding-articles-links {
+    font-family:
+        Public Sans Semibold Italic,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        Segoe UI,
+        Roboto,
+        Helvetica Neue,
+        Arial,
+        Noto Sans,
+        sans-serif,
+        'Apple Color Emoji',
+        'Segoe UI Emoji',
+        Segoe UI Symbol,
+        'Noto Color Emoji';
+    font-weight: 700;
+    font-style: italic;
+}
+
+figure {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+img {
+    border-radius: 10px;
+}
+
+.prose
+    :where(blockquote p:first-of-type):not(
+        :where([class~='not-prose'] *)
+    )::before,
+.prose
+    :where(blockquote p:first-of-type):not(
+        :where([class~='not-prose'] *)
+    )::before,
+.prose
+    :where(blockquote p:last-of-type):not(
+        :where([class~='not-prose'] *)
+    )::after,
+.prose
+    :where(blockquote p:last-of-type):not(
+        :where([class~='not-prose'] *)
+    )::after {
+    content: none;
+}
+
+.prose
+    :where(ul > li):not(:where([class~='not-prose'], [class~='not-prose'] *)),
+.prose
+    :where(ol > li):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
+    margin-left: 15px;
+}
+
+.prose
+    :where(ul > li):not(
+        :where([class~='not-prose'], [class~='not-prose'] *)
+    )::marker,
+.prose
+    :where(ol > li):not(
+        :where([class~='not-prose'], [class~='not-prose'] *)
+    )::marker {
+    color: var(--accent);
+}
+
+/* Details */
+
+.post-title {
+    font-family:
+        Public Sans Medium,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        Segoe UI,
+        Roboto,
+        Helvetica Neue,
+        Arial,
+        Noto Sans,
+        sans-serif,
+        'Apple Color Emoji',
+        'Segoe UI Emoji',
+        Segoe UI Symbol,
+        'Noto Color Emoji';
+}
+
+.post-date {
+    font-family:
+        Public Sans Bold,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        Segoe UI,
+        Roboto,
+        Helvetica Neue,
+        Arial,
+        Noto Sans,
+        sans-serif,
+        'Apple Color Emoji',
+        'Segoe UI Emoji',
+        Segoe UI Symbol,
+        'Noto Color Emoji';
+}
+
+.document-date {
+    font-family:
+        Public Sans Medium,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        Segoe UI,
+        Roboto,
+        Helvetica Neue,
+        Arial,
+        Noto Sans,
+        sans-serif,
+        'Apple Color Emoji',
+        'Segoe UI Emoji',
+        Segoe UI Symbol,
+        'Noto Color Emoji';
+}
