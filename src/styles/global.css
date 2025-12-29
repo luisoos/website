@@ -148,42 +148,35 @@ html.light body * {
 
 .prose :where(a):not(:where([class~='not-prose'] *)),
 .prose :where(strong):not(:where([class~='not-prose'] *)) {
-    color: var(--text);
     opacity: 90%;
 }
 
 .prose h1 a {
-    color: var(--text);
     opacity: 100%;
     word-spacing: 2px;
 }
 
 .prose h2 a {
-    color: var(--text);
     opacity: 100%;
     word-spacing: 1.5px;
 }
 
 .prose h3 a {
-    color: var(--text);
     opacity: 100%;
     word-spacing: 1.5px;
 }
 
 .prose h4 a {
-    color: var(--text);
     opacity: 100%;
     word-spacing: 1.5px;
 }
 
 .prose h5 a {
-    color: var(--text);
     opacity: 100%;
     word-spacing: 1px;
 }
 
 .prose h6 a {
-    color: var(--text);
     opacity: 100%;
     word-spacing: 1px;
 }
