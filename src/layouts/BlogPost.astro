@@ -9,18 +9,21 @@ const { title, description, pubDate } = Astro.props;
 ---
 
 <Layout title={title} description={description}>
-	<div class="min-h-screen">
-		<div class="mt-16 mx-auto mb-16 max-w-3xl px-5">
-			<article>
-				<h1 class="text-3xl md:text-4xl font-bold pt-2 pb-1">{title}</h1>
-				<p class="opacity-40 pt-2 mb-6 text-sm">
-					<FormattedDate date={pubDate} />
-				</p>
+    <div class='min-h-screen'>
+        <div class='mt-16 mx-auto mb-16 max-w-3xl px-5'>
+            <article>
+                <h1 class='text-3xl md:text-4xl font-bold pt-2 pb-1'>
+                    {title}
+                </h1>
+                <p class='opacity-40 pt-2 mb-6 text-sm'>
+                    <FormattedDate date={pubDate} />
+                </p>
 
-				<div class="prose dark:prose-invert max-w-none prose-headings:mt-6 prose-headings:mb-2 prose-li:my-1 prose-ul:my-0.5 prose-ul:pl-2 prose-ol:my-0.5 prose-ol:pl-2">
-					<slot />
-				</div>
-			</article>
-		</div>
-	</div>
+                <div
+                    class='prose dark:prose-invert max-w-none prose-headings:mt-6 prose-headings:mb-2 prose-li:my-1 prose-ul:my-0.5 prose-ul:pl-2 prose-ol:my-0.5 prose-ol:pl-2'>
+                    <slot />
+                </div>
+            </article>
+        </div>
+    </div>
 </Layout>

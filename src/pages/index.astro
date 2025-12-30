@@ -1,3 +1,101 @@
 ---
-return Astro.redirect('/blog');
+import ThemeToggle from '../components/ThemeToggle.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import Layout from '../layouts/Layout.astro';
+import { type Repository } from '../types/repository';
+import Repositories from '../components/Repositories.astro';
+import { Highlighter } from '../components/ui/highlighter';
+import FormattedDate from '../components/FormattedDate.astro';
+import { getCollection } from 'astro:content';
+
+const blogPosts = await getCollection('blog');
+const latestBlogPosts: { title: string; url: string; date: Date }[] = blogPosts
+    .sort(
+        (a, b) =>
+            new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime(),
+    )
+    .slice(0, 3)
+    .map((post) => ({
+        title: post.data.title,
+        url: `/blog/${post.id}`,
+        date: post.data.pubDate,
+    }));
+
+const githubUserName = 'luisoos';
+
+const githubUserRequest = await fetch(
+    `https://api.github.com/users/${githubUserName}`,
+);
+const githubUser = await githubUserRequest.json();
+
+const repositoriesRequest = await fetch(
+    `https://pinned.berrysauce.dev/get/${githubUserName}`,
+);
+const repositories: Repository[] = await repositoriesRequest.json();
 ---
+
+<Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+    <div class='min-h-screen'>
+        <div class='mt-16 mx-auto max-w-3xl px-5'>
+            <div class='w-full mb-4 flex items-start justify-between'>
+                <div>
+                    <h1 class='flex text-3xl md:text-4xl pt-2 pb-1 font-bold'>
+                        Hi, I'm {githubUser.avatar_url && <img
+                            src={githubUser.avatar_url}
+                            alt=''
+                            class='w-8 h-8 rounded-4xl my-auto mr-2 ml-4'
+                        />}Luis.
+                    </h1>
+                    <p class='opacity-80 flex'>
+                        Fullstack Software Engineer & University student based
+                        in <img
+                            src='https://animated-country-flags.malith.dev/webp/DE.webp'
+                            alt=''
+                            class='w-6 h-6 ml-1'
+                        />
+                    </p>
+                </div>
+                <div class='my-auto ml-auto'>
+                    <ThemeToggle />
+                </div>
+            </div>
+            <h2 class='text-2xl font-semibold mt-16'>
+                Building secure & high-quality software
+            </h2>
+            <p class='opacity-80'>
+                Fullstack developer with 
+                <Highlighter client:load action="underline" color="#fce46c">
+                    5+ years crafting intuitive user experiences
+                </Highlighter>
+                with a strong focus on privacy and performance. Check
+                out my latest blog posts below for insights on web
+                development, business informatics and best practices:
+            </p>
+
+            <h2 class='text-lg font-semibold mt-4'>
+                Recent Blog Posts
+            </h2>
+            <ul class='opacity-80 list-disc pl-5'>
+                {latestBlogPosts.map((post) => (
+                    <li class='mb-1'>
+                        <a
+                            href={post.url}
+                            class='text-blue-600'>
+                            {post.title}
+                            <span class="pl-2 opacity-40 no-underline"><FormattedDate date={post.date}></FormattedDate></span>
+                        </a>
+                    </li>
+                ))}
+            </ul>
+                
+
+            <h2 class='text-2xl font-semibold mb-4 mt-18'>
+                Pinned Repositories
+            </h2>
+            <div
+                class='repositories w-full grid grid-cols-1 sm:grid-cols-2 grid-rows-2 md:grid-rows-1 mb-12 gap-4'>
+                <Repositories {repositories} />
+            </div>
+        </div>
+    </div>
+</Layout>

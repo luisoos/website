@@ -1,24 +1,24 @@
 ---
-import "../styles/global.css";
+import '../styles/global.css';
 import BaseHead from '../components/BaseHead.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
 interface Props {
-	title?: string;
-	description?: string;
+    title?: string;
+    description?: string;
 }
 
 const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" class="scroll-smooth bg-white dark:bg-neutral-950">
-	<head>
-		<BaseHead title={title} description={description} />
-	</head>
-	<body class="text-neutral-900 dark:text-neutral-50 transition-colors">
-		<main class="py-8">
-			<slot />
-		</main>
-	</body>
+<html lang='en' class='scroll-smooth bg-white dark:bg-neutral-950'>
+    <head>
+        <BaseHead title={title} description={description} />
+    </head>
+    <body class='text-neutral-900 dark:text-neutral-50 transition-colors'>
+        <main class='py-8'>
+            <slot />
+        </main>
+    </body>
 </html>
