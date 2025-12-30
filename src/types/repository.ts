@@ -1,6 +1,7 @@
 export interface Repository {
     link: string | URL;
-    repo: string;
+    author: string;
+    name: string;
     description: string;
     languageColor: string;
     language: string;

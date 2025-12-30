@@ -12,7 +12,8 @@ const blogPosts = await getCollection('blog');
 const latestBlogPosts: { title: string; url: string; date: Date }[] = blogPosts
     .sort(
         (a, b) =>
-            new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime(),
+            new Date(b.data.pubDate).getTime() -
+            new Date(a.data.pubDate).getTime(),
     )
     .slice(0, 3)
     .map((post) => ({
@@ -40,17 +41,21 @@ const repositories: Repository[] = await repositoriesRequest.json();
             <div class='w-full mb-4 flex items-start justify-between'>
                 <div>
                     <h1 class='flex text-3xl md:text-4xl pt-2 pb-1 font-bold'>
-                        Hi, I'm {githubUser.avatar_url && <img
-                            src={githubUser.avatar_url}
-                            alt=''
-                            class='w-8 h-8 rounded-4xl my-auto mr-2 ml-4'
-                        />}Luis.
+                        Hi, I'm {
+                            githubUser.avatar_url && (
+                                <img
+                                    src={githubUser.avatar_url}
+                                    alt=''
+                                    class='w-8 h-8 rounded-4xl my-auto mr-2 ml-4'
+                                />
+                            )
+                        }Luis.
                     </h1>
                     <p class='opacity-80 flex'>
                         Fullstack Software Engineer & University student based
                         in <img
                             src='https://animated-country-flags.malith.dev/webp/DE.webp'
-                            alt=''
+                            alt='🇩🇪'
                             class='w-6 h-6 ml-1'
                         />
                     </p>
@@ -63,33 +68,52 @@ const repositories: Repository[] = await repositoriesRequest.json();
                 Building secure & high-quality software
             </h2>
             <p class='opacity-80'>
-                Fullstack developer with 
-                <Highlighter client:load action="underline" color="#fce46c">
+                Fullstack developer with
+                <Highlighter client:load action='underline' color='#fce46c'>
                     5+ years crafting intuitive user experiences
                 </Highlighter>
-                with a strong focus on privacy and performance. Check
-                out my latest blog posts below for insights on web
-                development, business informatics and best practices:
+                with a strong focus on privacy and performance. Check out my latest
+                blog posts — reflecting my personal opinions on new technology or
+                serving as informational pieces — and explore my pinned repositories
+                below.
             </p>
 
-            <h2 class='text-lg font-semibold mt-4'>
-                Recent Blog Posts
-            </h2>
+            <h2 class='text-xl font-semibold mb-2 mt-12'>Recent Blog Posts</h2>
             <ul class='opacity-80 list-disc pl-5'>
-                {latestBlogPosts.map((post) => (
-                    <li class='mb-1'>
-                        <a
-                            href={post.url}
-                            class='text-blue-600'>
-                            {post.title}
-                            <span class="pl-2 opacity-40 no-underline"><FormattedDate date={post.date}></FormattedDate></span>
-                        </a>
-                    </li>
-                ))}
+                {
+                    latestBlogPosts.map((post) => (
+                        <li class='mb-1'>
+                            <a href={post.url} class='text-blue-600'>
+                                {post.title}
+                                <span class='pl-2 opacity-40 no-underline'>
+                                    <FormattedDate date={post.date} />
+                                </span>
+                            </a>
+                        </li>
+                    ))
+                }
             </ul>
-                
+            <a
+                href='/blog'
+                class='mt-2 group inline-flex items-center gap-1 opacity-40 hover:opacity-100 transition-opacity'>
+                <span>View all blog posts</span>
+                <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='16'
+                    height='16'
+                    viewBox='0 0 24 24'
+                    fill='none'
+                    stroke='currentColor'
+                    stroke-width='2'
+                    stroke-linecap='round'
+                    stroke-linejoin='round'
+                    class='transition-transform duration-200 group-hover:translate-x-1'>
+                    <path d='M5 12h14'></path>
+                    <path d='m12 5 7 7-7 7'></path>
+                </svg>
+            </a>
 
-            <h2 class='text-2xl font-semibold mb-4 mt-18'>
+            <h2 class='text-xl font-semibold mb-4 mt-18'>
                 Pinned Repositories
             </h2>
             <div

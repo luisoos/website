@@ -1,6 +1,7 @@
 /* Tailwind CSS Functions */
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
+@custom-variant dark (&:where(.dark, .dark *));
 
 /* Dark mode overrides */
 html.dark {
@@ -262,7 +263,6 @@ h4 a {
         Times New Roman,
         Times,
         serif;
-    font-weight: 600;
 }
 
 h5,
@@ -275,7 +275,6 @@ h5 a {
         Times New Roman,
         Times,
         serif;
-    font-weight: 600;
 }
 
 h6,
@@ -288,7 +287,6 @@ h6 a {
         Times New Roman,
         Times,
         serif;
-    font-weight: 600;
 }
 
 .surrounding-articles-links {
