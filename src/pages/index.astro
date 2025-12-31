@@ -7,6 +7,8 @@ import Repositories from '../components/Repositories.astro';
 import { Highlighter } from '../components/ui/highlighter';
 import FormattedDate from '../components/FormattedDate.astro';
 import { getCollection } from 'astro:content';
+import { ReactIcon } from '../components/ui/icon';
+import TechStack from '../components/TechStack.astro';
 
 const blogPosts = await getCollection('blog');
 const latestBlogPosts: { title: string; url: string; date: Date }[] = blogPosts
@@ -37,7 +39,7 @@ const repositories: Repository[] = await repositoriesRequest.json();
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
     <div class='min-h-screen'>
-        <div class='mt-16 mx-auto max-w-3xl px-5'>
+        <div class='my-16 mx-auto max-w-3xl px-5'>
             <div class='w-full mb-4 flex items-start justify-between'>
                 <div>
                     <h1 class='flex text-3xl md:text-4xl pt-2 pb-1 font-bold'>
@@ -59,6 +61,15 @@ const repositories: Repository[] = await repositoriesRequest.json();
                             class='w-6 h-6 ml-1'
                         />
                     </p>
+                    <a
+                        href={`https://github.com/${githubUserName}`}
+                        class='flex ml-0.5 opacity-40 hover:opacity-80 transition-opacity duration-500'>
+                        <ReactIcon
+                            name='github'
+                            size={16}
+                            className='my-auto mr-2'
+                        /> @{githubUserName}
+                    </a>
                 </div>
                 <div class='my-auto ml-auto'>
                     <ThemeToggle />
@@ -119,6 +130,16 @@ const repositories: Repository[] = await repositoriesRequest.json();
             <div
                 class='repositories w-full grid grid-cols-1 sm:grid-cols-2 grid-rows-2 md:grid-rows-1 mb-12 gap-4'>
                 <Repositories {repositories} />
+            </div>
+
+            <h2 class='text-xl font-semibold mt-18'>Tech Stack</h2>
+            <p class='opacity-80'>
+                Tools & Technologies I am proficient in. Hover over any icon to
+                discover projects where I've applied these skills.
+            </p>
+            <div
+                class='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mt-2'>
+                <TechStack />
             </div>
         </div>
     </div>
