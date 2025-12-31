@@ -6,5 +6,5 @@ export interface TechStack {
     iconViewBox?: string;
     iconFill?: string;
     description?: string;
-    relatedProjects: StrippedRepository[];
+    relatedProjects: StrippedRepository[] | false;
 }

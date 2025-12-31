@@ -8,7 +8,7 @@ import { Highlighter } from '../components/ui/highlighter';
 import FormattedDate from '../components/FormattedDate.astro';
 import { getCollection } from 'astro:content';
 import { ReactIcon } from '../components/ui/icon';
-import TechStack from '../components/TechStack.astro';
+import TechStack from '../components/tech-stack';
 
 const blogPosts = await getCollection('blog');
 const latestBlogPosts: { title: string; url: string; date: Date }[] = blogPosts
@@ -139,7 +139,7 @@ const repositories: Repository[] = await repositoriesRequest.json();
             </p>
             <div
                 class='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mt-2'>
-                <TechStack />
+                <TechStack client:load />
             </div>
         </div>
     </div>

@@ -32,21 +32,25 @@ export function ReactIcon({
 }: IconProps) {
     if (name.startsWith('<path')) {
         return (
-      <svg
-        className="mr-1"
-        viewBox={iconViewBox}
-        fill={color} stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
-        style={{ 
-          width: `${size + 4}px !important`,     // ✅ !important + inline
-          height: `${size + 4}px !important`,
-          minWidth: `${size + 4}px`,
-          minHeight: `${size + 4}px`,
-          display: 'block',
-          flexShrink: 0
-        }}
-        dangerouslySetInnerHTML={{ __html: name }} 
-      />
-    );
+            <svg
+                className='mr-1'
+                viewBox={iconViewBox}
+                fill={color}
+                stroke='currentColor'
+                stroke-width='2'
+                stroke-linecap='round'
+                stroke-linejoin='round'
+                style={{
+                    width: `${size + 4}px !important`, // ✅ !important + inline
+                    height: `${size + 4}px !important`,
+                    minWidth: `${size + 4}px`,
+                    minHeight: `${size + 4}px`,
+                    display: 'block',
+                    flexShrink: 0,
+                }}
+                dangerouslySetInnerHTML={{ __html: name }}
+            />
+        );
     }
 
     const componentName =
@@ -58,5 +62,12 @@ export function ReactIcon({
         return null;
     }
 
-    return <IconComponent size={size} color={color} strokeWidth={FILL_THIN_ICONS.includes(name.toLowerCase()) ? 1.3 : 1} className={className} />;
+    return (
+        <IconComponent
+            size={size}
+            color={color}
+            strokeWidth={FILL_THIN_ICONS.includes(name.toLowerCase()) ? 1.3 : 1}
+            className={className}
+        />
+    );
 }

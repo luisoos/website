@@ -1,10 +1,10 @@
 export interface StrippedRepository {
-    link: string | URL;
     author: string;
     name: string;
 }
 
 export interface Repository extends StrippedRepository {
+    link: string | URL;
     description: string;
     languageColor: string;
     language: string;
