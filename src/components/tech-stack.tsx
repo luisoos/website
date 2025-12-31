@@ -182,7 +182,7 @@ export default function TechStack() {
                     ))
                 ) : (
                     <p className='text-sm italic'>
-                        All projects done with this are private/under NDA.
+                        All projects done with this technology are private/under NDA.
                     </p>
                 ))
             }
