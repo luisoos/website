@@ -10,6 +10,7 @@ import { getCollection } from 'astro:content';
 import { ReactIcon } from '../components/ui/icon';
 import TechStack from '../components/tech-stack';
 
+// Fetch latest 3 blog posts
 const blogPosts = await getCollection('blog');
 const latestBlogPosts: { title: string; url: string; date: Date }[] = blogPosts
     .sort(
@@ -24,17 +25,30 @@ const latestBlogPosts: { title: string; url: string; date: Date }[] = blogPosts
         date: post.data.pubDate,
     }));
 
+// Fetch GitHub user data and pinned repositories
 const githubUserName = 'luisoos';
 
+let githubUser;
 const githubUserRequest = await fetch(
     `https://api.github.com/users/${githubUserName}`,
 );
-const githubUser = await githubUserRequest.json();
+if (!githubUserRequest.ok) {
+    console.warn(`Pinned repos fetch failed: ${githubUserRequest.status}`);
+} else {
+    githubUser = await githubUserRequest.json();
+}
 
+// Fetch pinned repositories from third-party service
 const repositoriesRequest = await fetch(
     `https://pinned.berrysauce.dev/get/${githubUserName}`,
 );
-const repositories: Repository[] = await repositoriesRequest.json();
+let repositories: Repository[];
+if (!repositoriesRequest.ok) {
+    console.warn(`Pinned repos fetch failed: ${repositoriesRequest.status}`);
+    repositories = [];
+} else {
+    repositories = await repositoriesRequest.json();
+}
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
