@@ -4,6 +4,7 @@ import FormattedDate from '../../components/FormattedDate.astro';
 import ThemeToggle from '../../components/ThemeToggle.astro';
 import Layout from '../../layouts/Layout.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import Navbar from '../../components/Navbar';
 
 interface PostWithMetadata {
     id: string;
@@ -54,6 +55,7 @@ const bloggingDays = days.length;
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
     <div class='min-h-screen'>
+        <Navbar />
         <div class='mt-16 mx-auto max-w-3xl px-5'>
             <div class='w-full mb-4 flex items-start justify-between'>
                 <h1 class='text-3xl md:text-4xl pt-2 pb-1 font-bold'>Blog</h1>
