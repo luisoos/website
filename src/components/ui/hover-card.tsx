@@ -28,7 +28,7 @@ export default function HoverCard({
 
             {activeId === id && content && (
                 <div
-                    className='absolute z-50 w-64 bg-popover text-popover-foreground border rounded-md p-2 shadow-lg 
+                    className='absolute z-50 w-72 bg-popover text-popover-foreground border rounded-md p-2 shadow-lg 
                      animate-in slide-in-from-bottom-8 fade-in-0 duration-300 ease-out
                      top-0 left-1/2 -translate-x-1/2 -translate-y-full mt-2 max-w-xs
                      bg-white/80 dark:bg-neutral-800/80 backdrop-blur-xs 

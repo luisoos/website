@@ -1,6 +1,11 @@
 ---
-const { repositories } = Astro.props;
 import { type Repository } from '../types/repository';
+
+interface Props {
+  repositories: Repository[];
+}
+
+const { repositories } = Astro.props;
 
 import { findBlogForRepos } from '../utils/blogMatcher';
 const blogMatches = await findBlogForRepos(repositories);

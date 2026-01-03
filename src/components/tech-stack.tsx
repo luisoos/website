@@ -18,6 +18,7 @@ const techStack: TechStack[] = [
             { author: 'luisoos', name: 'food-tracker' },
             { author: 'luisoos', name: 'untis-ical' },
             { author: 'Floppahost', name: 'discord-bot' },
+            { author: 'luisoos', name: 'github-pinned-repo-sdk' },
         ],
     },
     {
@@ -79,6 +80,7 @@ const techStack: TechStack[] = [
             { author: 'luisoos', name: 'untis-ical' },
             { author: 'luisoos', name: 'better-github-api' },
             { author: 'luisoos', name: 'import-git-history' },
+            { author: 'luisoos', name: 'github-pinned-repo-sdk' },
         ],
     },
     {

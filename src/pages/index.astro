@@ -2,13 +2,13 @@
 import ThemeToggle from '../components/ThemeToggle.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import Layout from '../layouts/Layout.astro';
-import { type Repository } from '../types/repository';
 import Repositories from '../components/Repositories.astro';
 import { Highlighter } from '../components/ui/highlighter';
 import FormattedDate from '../components/FormattedDate.astro';
 import { getCollection } from 'astro:content';
 import { ReactIcon } from '../components/ui/icon';
 import TechStack from '../components/tech-stack';
+import { getPinnedRepos, type PinnedRepo, type GithubUser } from 'github-pinned-repo-sdk';
 
 // Fetch latest 3 blog posts
 const blogPosts = await getCollection('blog');
@@ -26,29 +26,14 @@ const latestBlogPosts: { title: string; url: string; date: Date }[] = blogPosts
     }));
 
 // Fetch GitHub user data and pinned repositories
+
+type ApiResponse = {
+  user: GithubUser;
+  pinned_repos: PinnedRepo[];
+  pinned_repos_total_stars: number;
+};
 const githubUserName = 'luisoos';
-
-let githubUser;
-const githubUserRequest = await fetch(
-    `https://api.github.com/users/${githubUserName}`,
-);
-if (!githubUserRequest.ok) {
-    console.warn(`Pinned repos fetch failed: ${githubUserRequest.status}`);
-} else {
-    githubUser = await githubUserRequest.json();
-}
-
-// Fetch pinned repositories from third-party service
-const repositoriesRequest = await fetch(
-    `https://pinned.berrysauce.dev/get/${githubUserName}`,
-);
-let repositories: Repository[];
-if (!repositoriesRequest.ok) {
-    console.warn(`Pinned repos fetch failed: ${repositoriesRequest.status}`);
-    repositories = [];
-} else {
-    repositories = await repositoriesRequest.json();
-}
+const { user: githubUser, pinned_repos: repositories } = await getPinnedRepos(githubUserName);
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
@@ -143,7 +128,17 @@ if (!repositoriesRequest.ok) {
             </h2>
             <div
                 class='repositories w-full grid grid-cols-1 sm:grid-cols-2 grid-rows-2 md:grid-rows-1 mb-12 gap-4'>
-                <Repositories {repositories} />
+                <Repositories repositories={repositories.map((apiRepo) => ({
+                    ...apiRepo,
+                    author: apiRepo.owner,
+                    name:   apiRepo.repo,
+                    link:          apiRepo.link || "", 
+                    description:   apiRepo.description || "Keine Beschreibung",
+                    language:      apiRepo.language || "N/A",
+                    languageColor: apiRepo.languageColor || "#ccc",
+                    stars:         apiRepo.stars ?? 0,
+                    forks:         apiRepo.forks ?? 0,
+                }))} />
             </div>
 
             <h2 class='text-xl font-semibold mt-18'>Tech Stack</h2>
