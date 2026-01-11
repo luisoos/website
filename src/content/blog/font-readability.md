@@ -1,5 +1,5 @@
 ---
-title: 'The secrets of good fonts'
+title: 'The secrets behind good fonts'
 description: 'Understanding typography, font legibility, readability, and the science behind what makes fonts accessible.'
 pubDate: 2022-10-09
 ---

@@ -27,12 +27,6 @@ const latestBlogPosts: { title: string; url: string; date: Date }[] = blogPosts
     }));
 
 // Fetch GitHub user data and pinned repositories
-
-type ApiResponse = {
-  user: GithubUser;
-  pinned_repos: PinnedRepo[];
-  pinned_repos_total_stars: number;
-};
 const githubUserName = 'luisoos';
 const { user: githubUser, pinned_repos: repositories } = await getPinnedRepos(githubUserName);
 ---
@@ -43,23 +37,23 @@ const { user: githubUser, pinned_repos: repositories } = await getPinnedRepos(gi
         <div class='my-16 mx-auto max-w-3xl px-5'>
             <div class='w-full mb-4 flex items-start justify-between'>
                 <div>
-                    <h1 class='flex text-3xl md:text-4xl pt-2 pb-1 font-bold'>
+                    <h1 class='text-3xl md:text-4xl pt-2 pb-1 font-bold'>
                         Hi, I'm {
                             githubUser.avatar_url && (
                                 <img
                                     src={githubUser.avatar_url}
                                     alt=''
-                                    class='w-8 h-8 rounded-4xl my-auto mr-2 ml-4'
+                                    class='inline w-8 h-8 mb-1 rounded-4xl mr-2 sm:ml-4'
                                 />
                             )
                         }Luis.
                     </h1>
-                    <p class='opacity-80 flex'>
-                        Fullstack Software Engineer & University student based
-                        in <img
+                    <p class='opacity-80'>
+                        <span>Fullstack Software Engineer & University student based
+                        in</span> <img
                             src='https://animated-country-flags.malith.dev/webp/DE.webp'
                             alt='🇩🇪'
-                            class='w-6 h-6 ml-1'
+                            class='inline w-6 h-6 ml-1'
                         />
                     </p>
                     <a
