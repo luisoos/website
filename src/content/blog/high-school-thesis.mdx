@@ -1,0 +1,103 @@
+---
+title: 'I Built an AI Flashcard App for My High School Thesis — Here's What I Learned'
+description: 'The software world is overflood with AI.'
+pubDate: 2024-02-08
+---
+
+import GitHubEmbed from '../../components/GitHubEmbed.astro';
+
+Studying has always felt inefficient to me. You read something, you try to remember it, ...
+
+There are better ways to study. Active Recall, Spaced Repetition, ...
+
+Over the course of a few months, I researched how generative AI can support student learning processes and then built something to prove the concept.
+
+Here's what I found, what I built, and how it actually performed.
+
+## AI in Education Is More Nuanced Than the Headlines Suggest
+
+To introduce Large Language Models as we know them, I summarized the mechanisms of the machine learning types *supervised learning*, *unsupervised learning*, and *reinforcement learning*, and how **fine-tuning can improve outcomes in different niches, such as education**.
+
+Before writing a single line of code, I spent a lot of time reading research on AI in education. The landscape is genuinely interesting and more complicated than most takes give it credit for.
+
+The most useful framework I came across was the **SAMR model** by Puentedura, which categorizes how deeply technology is integrated into learning. At the lowest level, a tool simply *substitutes* something that already existed — think Grammarly replacing a paper dictionary. At the highest level, *redefinition*, technology enables entirely new learning formats that weren't possible before.
+
+<figure>
+  <img alt="Figure 1.1: SAMR Model" src="https://user-images.githubusercontent.com/81855420/194817400-8476da76-60f3-4f57-a4b2-b45a26ef3bec.jpeg">
+  <figcaption>Figure 1.1: The SAMR model categorizes how deeply technology is integreated into learning</figcaption>
+</figure>
+
+Most AI tools in schools sit at the lower end of that scale. Plagiarism checkers, grammar tools, automated grading — useful, but not transformative. The more interesting examples are platforms like **Knewton** or **DreamBox**, which adapt learning paths based on individual student behavior, or **Duolingo**, which uses a language model to let you have actual conversations in a foreign language. Those reach the top of the SAMR model because they create genuinely new learning formats.
+
+The research also confirmed something intuitive: the most effective use of AI in education is *collaborative*. AI as a co-teacher, available at any time, infinitely patient, able to adjust its explanations to your level, is where the real value lies. Not AI replacing the teacher, but AI filling in the gaps.
+
+That said, the critical section of my research was just as important. Smart learning environments, which track student behavior in real time to optimize teaching, raise serious privacy concerns. The question of who owns that data and whether it follows students into their adult lives is largely unanswered. Any honest take on AI in education has to sit with that discomfort.
+
+## What I Built
+
+The practical part of my thesis was a web app called **LearnLab**. The core idea is simple: you paste a URL or some text, and the app generates a set of flashcards from it using AI.
+
+> **Annotation 12th March 2026:** I'm a big fan of RemNote nowadays and use it throughout university (not widely known at the time) but back in the day, this was one of the first projects to bring AI-generated flashcards to life.
+
+<figure>
+  <video controls width="100%" alt="Figure 1.2: Video using the project">
+    <source src="https://private-user-images.githubusercontent.com/156832999/297431102-44f24c28-95f2-470d-95eb-550bea30e097.mp4?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NzM1NjMwMzQsIm5iZiI6MTc3MzU2MjczNCwicGF0aCI6Ii8xNTY4MzI5OTkvMjk3NDMxMTAyLTQ0ZjI0YzI4LTk1ZjItNDcwZC05NWViLTU1MGJlYTMwZTA5Ny5tcDQ_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmXC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjYwMzE1JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmXC1BbXotRGF0ZT0yMDI2MDMxNVQwODE4NTRaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT02YjAyNzM3NWJlMmNlMWFiNWZlMDlhNDY0NmE5YWM2ZWFhOWM0YTVkZDRmZThjOTgyNjQ4N2NmOTA5ODhjMWE5JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.hWz1RoDq-1AtHBPW3gWGNyxtXKIpZf8BuqUNRW40QD0" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <figcaption>Figure 1.2: LearnLab demo — AI-generated flashcards from a Wikipedia article using the Hugging Face Inference API.</figcaption>
+</figure>
+
+Users can create *stacks* of flashcards, study them, and track their learning streak across days. The AI-generated cards are the differentiating feature — instead of manually typing out every question and answer, the model does a first pass for you.
+
+**The tech stack** is straightforward:
+
+- **Frontend:** Nuxt.js with TypeScript and TailwindCSS
+- **Backend:** Node.js with Express.js, written in TypeScript
+- **Database:** MongoDB
+- **AI:** Hugging Face Inference API
+
+<figure>
+  <img alt="Figure 1.3: Tech-Stack" src="https://raw.githubusercontent.com/moreluis/learnlab/a849a40d5294d38e6ab17241fbf798ace30558d0/docs/assets/techstack.svg">
+  <figcaption>Figure 1.3: LearnLab's tech stack — Nuxt.js frontend, Node.js/Express backend, MongoDB and Hugging Face as third-party services.</figcaption>
+</figure>
+
+The AI generation works in three steps. The backend fetches the content of the given URL using `axios` and extracts the readable text with `cheerio`. That text is then split into chunks. For each chunk, the model first generates a question, then uses that question alongside the original text to generate an answer. The result is a list of question-answer pairs that get saved as flashcards.
+
+For the model, I chose `google/flan-t5-base`, a free, open-source model available through Hugging Face. It handles instruction-following tasks like question generation reasonably well and didn't require any paid API access, which mattered for a school project. The full source code is open source and available on [GitHub](https://github.com/luisoos/learnlab).
+
+<GitHubEmbed repo='luisoos/learnlab' />
+
+---
+
+## Here's How It Actually Performed
+
+I evaluated 76 generated outputs — question-and-answer pairs drawn from six Wikipedia articles, three in English and three in German, covering history, geography, and physics.
+
+Each output was categorized as *correct*, *minor difference* (e.g. a small factual error or a language mismatch between question and answer), or *wrong*.
+
+<figure>
+  <img alt="Figure 1.4: Accuracy Chart" src="https://raw.githubusercontent.com/moreluis/learnlab/a849a40d5294d38e6ab17241fbf798ace30558d0/docs/assets/techstack.svg">
+  <figcaption>Figure 1.4: Accuracy chart: a better Large Language Model would have improved the outcomes.</figcaption>
+</figure>
+
+The results were honest: **46% fully correct, 38% wrong**. A few patterns stood out clearly.
+
+English inputs performed significantly better than German ones. The model was trained predominantly on English data, which shows. Technical topics also caused more errors than general ones — the model struggled when precise terminology mattered. And interestingly, generated questions tended to be more accurate than their corresponding answers.
+
+The conclusion here isn't that the approach doesn't work — it's that **the model is the bottleneck**. The architecture is sound. If you swap `flan-t5-base` for something like GPT-3.5 or a more recent instruction-tuned model, the results would look very different. For a free, open-source model running on a Hugging Face free tier, 46% fully correct is actually a reasonable proof of concept.
+
+> **Annotation, March 12th 2026:** It's a shame there were no good free options in the early days of LLM API integration. Nowadays, plenty of free tiers with capable models exist, which would have improved the quality and accuracy of the generated flashcards significantly.
+
+---
+
+## What I Actually Took Away From All This
+
+A few things stuck with me after finishing this project.
+
+First, the SAMR framing is genuinely useful when evaluating AI tools, not just in education, but anywhere. The question isn't "does this use AI" but "does this enable something that wasn't possible before?"
+
+Second, model choice matters enormously. LearnLab as an idea scales directly with the quality of the underlying model. The same algorithm with a more capable LLM would produce noticeably better cards and that gap is only going to widen as models improve.
+
+Third, and maybe most importantly: the right relationship between AI and learning is complementary. AI shouldn't replace the process of thinking through material yourself, it should reduce the friction around the parts that don't require thinking. Generating a first draft of flashcards from a Wikipedia article is exactly that kind of task.
+
+The bigger questions around data privacy, dependency, and equity don't have clean answers yet. But they're the right questions to be asking, and they deserve more public attention than they currently get.

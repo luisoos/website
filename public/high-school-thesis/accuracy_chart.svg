@@ -1,0 +1,50 @@
+<svg width="520" height="340" viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Correct: 46.05% -->
+  <path d="M220,175 L220,60 A115,115 0 0,1 249,286 Z"
+        fill="#4a6b68" stroke="white" stroke-width="2"/>
+
+  <!-- Wrong: 38.16% -->
+  <path d="M220,175 L249,286 A115,115 0 0,1 124,112 Z"
+        fill="#c0bfbb" stroke="white" stroke-width="2"/>
+
+  <!-- Minor difference: 15.79% -->
+  <path d="M220,175 L124,112 A115,115 0 0,1 220,60 Z"
+        fill="#7a9693" stroke="white" stroke-width="2"/>
+
+  <!-- Percentage labels inside slices -->
+  <text x="282" y="171" text-anchor="middle" font-size="13"
+        font-family="-apple-system,BlinkMacSystemFont,sans-serif"
+        font-weight="600" fill="white">46.05%</text>
+
+  <text x="165" y="219" text-anchor="middle" font-size="13"
+        font-family="-apple-system,BlinkMacSystemFont,sans-serif"
+        font-weight="600" fill="#3a3a38">38.16%</text>
+
+  <text x="190" y="124" text-anchor="middle" font-size="13"
+        font-family="-apple-system,BlinkMacSystemFont,sans-serif"
+        font-weight="600" fill="white">15.79%</text>
+
+  <!-- Leader lines and labels -->
+  <line x1="334" y1="161" x2="360" y2="120" stroke="#5f5e5a" stroke-width="0.8"/>
+  <text x="366" y="117" font-size="14"
+        font-family="-apple-system,BlinkMacSystemFont,sans-serif"
+        font-weight="500" fill="#1a1a18">Correct</text>
+
+  <line x1="128" y1="241" x2="90" y2="276" stroke="#5f5e5a" stroke-width="0.8"/>
+  <text x="88" y="292" font-size="14"
+        font-family="-apple-system,BlinkMacSystemFont,sans-serif"
+        font-weight="500" fill="#1a1a18" text-anchor="middle">Wrong</text>
+
+  <line x1="166" y1="74" x2="112" y2="58" stroke="#5f5e5a" stroke-width="0.8"/>
+  <text x="108" y="55" font-size="14"
+        font-family="-apple-system,BlinkMacSystemFont,sans-serif"
+        font-weight="500" fill="#1a1a18" text-anchor="end">Minor</text>
+  <text x="108" y="72" font-size="14"
+        font-family="-apple-system,BlinkMacSystemFont,sans-serif"
+        font-weight="500" fill="#1a1a18" text-anchor="end">difference</text>
+
+  <text x="220" y="330" text-anchor="middle" font-size="11"
+        font-family="-apple-system,BlinkMacSystemFont,sans-serif"
+        fill="#888780">n = 76 evaluated outputs</text>
+</svg>
